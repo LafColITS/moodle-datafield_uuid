@@ -18,28 +18,28 @@
  * datafield_uuid capability definitions.
  *
  * @package   datafield_uuid
- * @copyright 2013 Lafayette College ITS
+ * @copyright 2024 Lafayette College ITS
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$capabilities = array(
-    'datafield/uuid:manage' => array(
+$capabilities = [
+    'datafield/uuid:manage' => [
         'riskbitmask' => RISK_DATALOSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
-        'archetypes' => array(
+        'archetypes' => [
             'manager' => CAP_ALLOW
-        ),
-    ),
-    'datafield/uuid:view' => array(
+        ],
+    ],
+    'datafield/uuid:view' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
-        'archetypes' => array(
+        'archetypes' => [
             'manager' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
-        ),
-    ),
-);
+        ],
+    ],
+];

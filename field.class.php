@@ -15,22 +15,44 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    datafield
- * @subpackage uuid
+ * Class definition of UUID datafield.
+ *
+ * @package    datafield_uuid
  * @copyright  2024 onwards Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use core\notification;
 
-require_once __DIR__ . '/../text/field.class.php';
+defined('MOODLE_INTERNAL') || die();
 
+require_once(__DIR__ . '/../text/field.class.php');
+
+/**
+ * Class definition of UUID datafield.
+ * 
+ * Extends short text for a hidden field type.
+ *
+ * @package    datafield_uuid
+ * @copyright  2024 onwards Lafayette College ITS
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class data_field_uuid extends data_field_text {
+    /** @var string The internal datafield type */
     public $type = 'uuid';
 
+    /** @var string override priority. */
     protected static $priority = self::MAX_PRIORITY;
 
-    function display_add_field($recordid=0, $formdata=null) {
+    /**
+     * Output control for editing content.
+     *
+     * @param int $recordid the id of the data record.
+     * @param object $formdata the submitted form.
+     *
+     * @return string
+     */
+    public function display_add_field($recordid=0, $formdata=null) {
         global $DB, $OUTPUT;
 
         $readonly = '';
@@ -43,14 +65,14 @@ class data_field_uuid extends data_field_text {
             $fieldname = 'field_' . $this->field->id;
             $content = $formdata->$fieldname;
         } else if ($recordid) {
-            $content = $DB->get_field('data_content', 'content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid));
+            $content = $DB->get_field('data_content', 'content', ['fieldid' => $this->field->id, 'recordid' => $recordid]);
         } else {
             $content = '';
         }
 
-        // beware get_field returns false for new, empty records MDL-18567
-        if ($content===false) {
-            $content='';
+        // Beware get_field returns false for new, empty records MDL-18567.
+        if ($content === false) {
+            $content = '';
         }
 
         if (has_capability('datafield/uuid:view', $context)) {
@@ -79,7 +101,11 @@ class data_field_uuid extends data_field_text {
      * Capability checks occur here because the field_validation
      * method does not have access to the old record.
      *
-     * @param 
+     * @param int $recordid the record id
+     * @param string $value the content value
+     * @param string $name tbh don't know what this does
+     *
+     * @return bool
      */
     function update_content($recordid, $value, $name='') {
         global $DB;
@@ -92,15 +118,15 @@ class data_field_uuid extends data_field_text {
 
         $context = \context_module::instance($this->cm->id);
 
-        if ($oldcontent = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
-            if(($content->content !== $oldcontent->content) && ! has_capability('datafield/uuid:manage', $context)) {
+        if ($oldcontent = $DB->get_record('data_content', ['fieldid' => $this->field->id, 'recordid' => $recordid])) {
+            if (($content->content !== $oldcontent->content) && ! has_capability('datafield/uuid:manage', $context)) {
                 notification::error(get_string('readonly', 'datafield_uuid', $this->field->name));
                 return false;
             }
             $content->id = $oldcontent->id;
             return $DB->update_record('data_content', $content);
         } else {
-            if(!empty($content->content) && ! has_capability('datafield/uuid:manage', $context)) {
+            if (!empty($content->content) && ! has_capability('datafield/uuid:manage', $context)) {
                 notification::error(get_string('readonly', 'datafield_uuid', $this->field->name));
                 return false;
             }

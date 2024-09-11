@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -18,8 +17,7 @@
 /**
  * Strings for component 'datafield_uuid', language 'en', branch 'main'
  *
- * @package    datafield
- * @subpackage uuid
+ * @package    datafield_uuid
  * @copyright  2024 onwards Lafayette College ITS
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
