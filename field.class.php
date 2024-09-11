@@ -30,7 +30,7 @@ require_once(__DIR__ . '/../text/field.class.php');
 
 /**
  * Class definition of UUID datafield.
- * 
+ *
  * Extends short text for a hidden field type.
  *
  * @package    datafield_uuid
@@ -107,7 +107,7 @@ class data_field_uuid extends data_field_text {
      *
      * @return bool
      */
-    function update_content($recordid, $value, $name='') {
+    public function update_content($recordid, $value, $name='') {
         global $DB;
 
         // Populate the new record.
