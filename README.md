@@ -16,5 +16,9 @@ The UUID datafield will appear in the list of fields when configuring a database
 ## Configuration
 The datafield has no options.
 
+## Licensing
+
+Vectors and icons by <a href="https://github.com/Donnnno/Arcticons?ref=svgrepo.com" target="_blank">Donnnno</a> in GPL License via <a href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>.
+
 ## Author
 Charles Fulton (fultonc@lafayette.edu)
